@@ -7,41 +7,28 @@ def githubProperties = new Properties()
 githubProperties.load(new FileInputStream(rootProject.file("github.properties")))
 
 def getVersionName = { ->
-    return "0.0.3"
+    return "0.0.2"
 }
 
 def getArtificatId = { ->
     return "maintenancekit"
 }
 
-publishing {
-    publications {
-        Android(MavenPublication) {
-            groupId 'ch.upte'
-            artifactId getArtificatId()
-            version getVersionName()
-            artifact("$buildDir/outputs/aar/${getArtificatId()}-release.aar")
-        }
-    }
-
-    repositories {
-        maven {
-            name = "GitHubPackages"
-            /** Configure path of your package repository on Github
-             ** Replace GITHUB_USERID with your/organisation Github userID
-             ** and REPOSITORY with the repository name on GitHub
-             */
-            url = uri("https://maven.pkg.github.com/uptech/android-maintenance-kit")
-            credentials {
-                /** Create github.properties in root project folder file with
-                 ** gpr.usr=GITHUB_USER_ID & gpr.key=PERSONAL_ACCESS_TOKEN
-                 ** Set env variable GPR_USER & GPR_API_KEY if not adding a properties file**/
-
-                username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
-                password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
-            }
-        }
-    }
+project.ext {
+    mavDevelopers = ["ch":"UpTech"]
+    mavSiteUrl = "https://github.com/uptech/android-maintenance-kit"
+    mavGitUrl = mavSiteUrl + '.git'
+    mavProjectName = 'android-maintenance-kit'
+    mavPublishToRemoteRepo = true
+    mavRepoRemoteName = "GitHubPackages"
+    mavRemoteRepoUser = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
+    mavRemoteRepoPassword = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
+    mavRepoRemoteUrl = "https://maven.pkg.github.com/uptech/android-maintenance-kit"
+    mavLibraryLicenses = ["Apache-2.0":'http://www.apache.org/licenses/LICENSE-2.0.txt']
+    mavLibraryDescription = "Maintenance API Library"
+    mavArtifactVersion = getVersionName()
+    mavArtifactGroupId = "ch.upte"
+    mavArtifactArtifactId = getArtificatId()
 }
 
 android {
@@ -61,10 +48,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
-// To inline the bytecode built with JVM target 1.8 into
-// bytecode that is being built with JVM target 1.6. (e.g. navArgs)
-
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -100,4 +83,4 @@ dependencies {
     api "com.jakewharton.timber:timber:$timber_version"
 }
 
-apply from: 'https://raw.githubusercontent.com/sky-uk/gradle-maven-plugin/master/gradle-mavenizer.gradle'
+apply from: 'https://raw.githubusercontent.com/chillbrodev/gradle-maven-plugin/master/gradle-mavenizer.gradle'
