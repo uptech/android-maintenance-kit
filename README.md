@@ -11,6 +11,13 @@ MaintenanceKit is a simple framework to help with determining one of the followi
 ### Publishing
 - This library is published to Github Packages via [Gradle Mavenizer](https://github.com/chillbrodev/gradle-maven-plugin)
 
+### JVM Target
+```
+kotlinOptions {
+    jvmTarget = JavaVersion.VERSION_1_8.toString()
+}
+```
+
 ### Handling Updates
 MaintenanceKit allows for a simple and convenient way to handle checking for app updates. You specify the latest version and the minimum functioning version of the app in the JSON file along with a build number. There are two ways of determining the version, and that is either by the version string (1.0.0) or the build number (22)
 
