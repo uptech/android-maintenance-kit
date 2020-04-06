@@ -72,3 +72,27 @@ Each platform can contain a nullable `message` dictionary containing two keys, `
 }
 
 ```
+
+## License
+
+`Android Maintenance Kit` is Copyright © 2017-2020 UpTech Works, LLC. It is free software, and
+may be redistributed under the terms specified in the LICENSE file.
+
+## About <img src="http://upte.ch/img/logo.png" width="180">
+
+`Android Maintenance Kit` is maintained and funded by [UpTech Works, LLC][uptech], a
+software product, design & development consultancy.
+
+We love open source software. See [our other projects][community] or
+[hire us][hire] to design, develop, and grow your product.
+
+[community]: https://github.com/uptech
+[hire]: http://upte.ch
+[uptech]: http://upte.ch
+[carthage]: https://github.com/Carthage/Carthage
+[constraid]: https://github.com/uptech/Constraid
+[crazyman]: https://www.shutterstock.com/image-vector/crazy-cartoon-man-straight-jacket-193143881
+[Ron Leishman]: https://www.shutterstock.com/g/Ron+Leishman
+[travisproject]: https://travis-ci.org/uptech/Constraid
+[gitterroom]: https://gitter.im/uptech/Constraid?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
+[cartfile]: https://github.com/Carthage/Carthage#adding-frameworks-to-an-application
