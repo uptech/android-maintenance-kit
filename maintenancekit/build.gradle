@@ -2,20 +2,17 @@ apply plugin: 'maven-publish'
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'maven'
 
 def githubProperties = new Properties()
 githubProperties.load(new FileInputStream(rootProject.file("github.properties")))
 
 def getVersionName = { ->
-    return "0.0.3"
+    return "0.0.4"
 }
 
 def getArtificatId = { ->
     return "maintenancekit"
 }
-
-group = 'com.github.uptech'
 
 project.ext {
     mavDevelopers = ["ch":"UpTech"]
