@@ -7,7 +7,7 @@ def githubProperties = new Properties()
 githubProperties.load(new FileInputStream(rootProject.file("github.properties")))
 
 def getVersionName = { ->
-    return "0.0.6"
+    return "0.0.7"
 }
 
 def getArtificatId = { ->
@@ -19,7 +19,7 @@ project.ext {
     mavSiteUrl = "https://github.com/uptech/android-maintenance-kit"
     mavGitUrl = mavSiteUrl + '.git'
     mavProjectName = 'android-maintenance-kit'
-    mavPublishToRemoteRepo = true
+//    mavPublishToRemoteRepo = true
     mavPublishToMavenLocal = true
     mavRepoRemoteName = "GitHubPackages"
     mavRemoteRepoUser = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
