@@ -1,4 +1,5 @@
 package ch.upte.maintenance.kit.api
+
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
@@ -64,3 +65,34 @@ data class Platform(
     @SerializedName("store_url")
     val storeUrl: String
 ) : Parcelable
+
+fun MaintenanceResponse.isMaintenanceOrAppUpdate(
+    appVersion: String,
+    notNow: Boolean
+): MAINTENANCE_TYPE {
+    val active = this.maintenance?.active ?: false
+    return if (this.error) {
+        MAINTENANCE_TYPE.ERROR
+    } else {
+        if (active) {
+            MAINTENANCE_TYPE.MAINTENANCE
+        } else {
+            //check platform upgrade
+            this.upgrade?.platforms?.firstOrNull { it.platform.toLowerCase() == "android" }
+                ?.let { platform ->
+                    if (!notNow && (appVersion < platform.minimumVersion || appVersion < platform.latestVersion)) {
+                        MAINTENANCE_TYPE.APP_UPDATE
+                    } else {
+                        MAINTENANCE_TYPE.NONE
+                    }
+                } ?: MAINTENANCE_TYPE.NONE
+        }
+    }
+}
+
+enum class MAINTENANCE_TYPE {
+    ERROR,
+    APP_UPDATE,
+    MAINTENANCE,
+    NONE
+}
