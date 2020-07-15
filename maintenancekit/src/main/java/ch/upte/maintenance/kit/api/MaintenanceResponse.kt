@@ -80,7 +80,10 @@ fun MaintenanceResponse.isMaintenanceOrAppUpdate(
             //check platform upgrade
             this.upgrade?.platforms?.firstOrNull { it.platform.toLowerCase() == "android" }
                 ?.let { platform ->
-                    if (!notNow && (appVersion < platform.minimumVersion || appVersion < platform.latestVersion)) {
+                    val version = appVersion.split(".").joinToString("").toInt()
+                    val minVersion = platform.minimumVersion.split(".").joinToString("").toInt()
+                    val latestVersion = platform.latestVersion.split(".").joinToString("").toInt()
+                    if (!notNow && (version < minVersion || version < latestVersion)) {
                         MAINTENANCE_TYPE.APP_UPDATE
                     } else {
                         MAINTENANCE_TYPE.NONE
